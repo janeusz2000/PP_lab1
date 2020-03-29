@@ -13,7 +13,7 @@ def sin_signal(_duration, _volume, f, _signal_type, _dB_offset):
     :param _volume: overall volume in range 0 to 1 (ex. 0.5)
     :param f: frequency of the signal
     :param _signal_type: sin or noise
-    :param _dB_offset: volume of set in dB in range -90 to 0
+    :param _dB_offset: volume of the offset in dB in range from -90 to 0
     :return: numpy array with values of the signal
     """
 
