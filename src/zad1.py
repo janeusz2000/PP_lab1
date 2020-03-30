@@ -4,8 +4,8 @@ import time
 import sounddevice as sd
 
 distances = [-3.5, -4.5, -5, -6, -8]
-ref_wav = functions.gen_signal(0.2, 0.5, 1000, "sin", -3)
-random_wav = [functions.gen_signal(0.2, 0.5, 1000, "sin", x) for x in distances]
+ref_wav = functions.gen_signal(1, 0.5, 1000, "sin", -3)
+random_wav = [functions.gen_signal(1, 0.5, 1000, "sin", x) for x in distances]
 
 if __name__ == '__main__':
     tests = distances * 10
