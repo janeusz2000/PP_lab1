@@ -13,7 +13,7 @@ if __name__ == '__main__':
     choices = []
     for test in tests:
         sd.play(ref_wav, functions.fs)
-        time.sleep(1)
+        time.sleep(2)
         sd.play(random_wav[distances.index(test)], functions.fs)
         choice = input('Roznica? [Y/N]')
         choices.append(choice)

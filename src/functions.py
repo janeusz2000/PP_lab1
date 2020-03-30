@@ -1,65 +1,49 @@
 import numpy as np
 import scipy.io.wavfile as wav
 import matplotlib.pyplot as plt
-import random
+
 # GLOBAL Variables
 fs = 48000
 
 
-def gen_signal(_duration, _volume, f, _signal_type, _db_offset):
+def gen_signal(duration, volume, freq, signal_type, db_offset):
     """
-
-    :param _duration: in seconds
-    :param _volume: overall volume in range 0 to 1 (ex. 0.5)
-    :param f: frequency of the signal
-    :param _signal_type: sin or noise
-    :param _db_offset: volume of the offset in dB in range from -90 to 0
+    :param duration: in seconds
+    :param volume: overall volume in range 0 to 1 (ex. 0.5)
+    :param freq: frequency of the signal
+    :param signal_type: sin or noise
+    :param db_offset: volume of the offset in dB in range from -90 to 0
     :return: numpy array with values of the signal
     """
-    signal_len = int(_duration * fs)
-    # x_os = np.ones(int(_duration * fs))
+    signal_len = int(duration * fs)
 
-    if _signal_type == "sin":
-        # SINUS gen
-        y_os = np.linspace(0, 2 * np.pi * (f / fs) * signal_len, num=signal_len)
-        # for it in range(0, np.size(x_os)):
-        #     x_os[it] = 2 * np.pi * (f / fs) * it
-        # y_os = np.sin(x_os)
-        #
-        # # NORM
-        # y_os = y_os*32767
+    if signal_type == "sin":
+        signal_x = np.linspace(0, 2 * np.pi * (freq / fs) * signal_len, num=signal_len, endpoint=False)
+        signal_y = np.sin(signal_x) * 32767
+    elif signal_type == "noise":
+        signal_y = np.random.random(signal_len) * 32767
+        signal_y = signal_y.astype(np.int16)
+    else:
+        print('błędne parametry')
+        exit()
 
-    if _signal_type == "noise":
-        # NOISE gen + NORM
-        y_os = np.random.random(signal_len)
-        # y_os = np.ones(int(_duration * fs))
-        # for it in range(0, np.size(x_os)):
-        #     y_os[it] = random.randrange(-32767, 32767)
+    # In and out window generation
+    window_len = int(fs / 100)
+    window_x = np.linspace(0, 2 * np.pi * (25 / fs) * window_len, num=window_len, endpoint=False)
+    window_in_y = np.sin(window_x)
+    window_out_y = np.cos(window_x)
 
-    # WINDOW in and out gen
-    x_win = np.linspace(0, 2 * np.pi * (25 / fs) * int(fs / 100), num=int(fs / 100))
-    # x_win = np.ones(int(fs/100))
-    # for it in range(0, np.size(x_win)):
-    #     x_win[it] = 2*np.pi*(25/fs)*it
+    # Applying window
+    out_offset = len(signal_y) - window_len
+    for i in range(window_len):
+        signal_y[i] *= window_in_y[i]
+        signal_y[i + out_offset] *= window_out_y[i]
 
-    y_win_in = np.sin(x_win)
-    y_win_out = np.cos(x_win)
+    # Volume
+    real_db_offset = 10 ** (db_offset / 20)
+    signal_y = (signal_y * real_db_offset * volume).astype(np.int16)
 
-    # APPLYING WINDOW
-    for it in range(0, np.size(y_win_in)):
-        # y_os[it] = y_os[it]*y_win_in[it]
-        y_os[it] *= y_win_in[it]
-
-    for it in range(np.size(y_os)-np.size(y_win_out), np.size(y_os)):
-        y_os[it] = y_os[it]*y_win_out[it-np.size(y_os)+np.size(y_win_out)]
-
-    # VOLUME
-    real_db_offset = 10**(_db_offset/20)
-    y_os *= _volume * real_db_offset
-    # for it in range(0, np.size(y_os)):
-    #     y_os[it] = int(y_os[it]*_volume*real_db_offset)
-
-    return y_os
+    return signal_y
 
 
 def create_wav(_name, _data):

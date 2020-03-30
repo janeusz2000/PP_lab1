@@ -10,12 +10,12 @@ choice = ''
 
 
 if __name__ == '__main__':
-    while choice != 'YN':
-        second_wav = functions.gen_signal(ref_dur + difference, 0.5, 3000, "sin", -3)
+    while choice != 'Y':
+        second_wav = functions.gen_signal(ref_dur + difference, 0.5, 3000, "noise", -3)
         sd.play(first_wav, functions.fs)
-        time.sleep(0.3)
+        time.sleep(2.3)
         sd.play(second_wav, functions.fs)
-        time.sleep(0.3)
+        time.sleep(ref_dur + difference + 0.3)
         sd.play(first_wav, functions.fs)
         choice = input('Różnica w głośności tonów --> [Y/N]')
         if choice == 'Y':

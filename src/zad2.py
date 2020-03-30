@@ -13,7 +13,7 @@ if __name__ == '__main__':
     while choice != 'S':
         second_wav = functions.gen_signal(1, 0.5, 3000, "sin", ref_vol-difference)
         sd.play(first_wav, functions.fs)
-        time.sleep(0.5)
+        time.sleep(1.5)
         sd.play(second_wav, functions.fs)
         choice = input('Jeśli stop --> S')
         if choice == 'S':
