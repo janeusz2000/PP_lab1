@@ -11,7 +11,7 @@ test_freq = []
 correct_ans = []
 prev_ans_correct = False
 
-for _ in range(0, 5):
+for _ in range(0, 50):
     new_wav = fun.gen_simple(1, 0.5, base_freq + delta_f, "sin", -3)
 
     sd.play(ref_wav, fun.fs)
