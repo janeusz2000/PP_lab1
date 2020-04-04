@@ -1,0 +1,5 @@
+Ró¿nica 15, odpowiedz True, freq 1019
+Ró¿nica 15, odpowiedz True, freq 1019
+Ró¿nica 11, odpowiedz False, freq 1019
+Ró¿nica 15, odpowiedz False, freq 1019
+Ró¿nica 19, odpowiedz True, freq 1019
