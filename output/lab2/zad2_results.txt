@@ -1,5 +1,50 @@
-Ró¿nica 15, odpowiedz True, freq 1019
-Ró¿nica 15, odpowiedz True, freq 1019
-Ró¿nica 11, odpowiedz False, freq 1019
-Ró¿nica 15, odpowiedz False, freq 1019
-Ró¿nica 19, odpowiedz True, freq 1019
+Ró¿nica 15, odpowiedz True
+Ró¿nica 15, odpowiedz True
+Ró¿nica 11, odpowiedz True
+Ró¿nica 7, odpowiedz False
+Ró¿nica 11, odpowiedz True
+Ró¿nica 11, odpowiedz False
+Ró¿nica 15, odpowiedz True
+Ró¿nica 15, odpowiedz True
+Ró¿nica 11, odpowiedz False
+Ró¿nica 15, odpowiedz True
+Ró¿nica 15, odpowiedz False
+Ró¿nica 19, odpowiedz True
+Ró¿nica 19, odpowiedz True
+Ró¿nica 15, odpowiedz True
+Ró¿nica 11, odpowiedz False
+Ró¿nica 15, odpowiedz True
+Ró¿nica 15, odpowiedz True
+Ró¿nica 11, odpowiedz True
+Ró¿nica 7, odpowiedz False
+Ró¿nica 11, odpowiedz True
+Ró¿nica 11, odpowiedz False
+Ró¿nica 15, odpowiedz True
+Ró¿nica 15, odpowiedz True
+Ró¿nica 11, odpowiedz True
+Ró¿nica 7, odpowiedz True
+Ró¿nica 3, odpowiedz True
+Ró¿nica -1, odpowiedz False
+Ró¿nica -5, odpowiedz False
+Ró¿nica -9, odpowiedz False
+Ró¿nica -13, odpowiedz True
+Ró¿nica -11, odpowiedz True
+Ró¿nica -9, odpowiedz True
+Ró¿nica -5, odpowiedz False
+Ró¿nica -9, odpowiedz True
+Ró¿nica -5, odpowiedz True
+Ró¿nica -1, odpowiedz False
+Ró¿nica -5, odpowiedz False
+Ró¿nica -9, odpowiedz False
+Ró¿nica -13, odpowiedz True
+Ró¿nica -9, odpowiedz True
+Ró¿nica -5, odpowiedz True
+Ró¿nica -1, odpowiedz True
+Ró¿nica 3, odpowiedz False
+Ró¿nica 7, odpowiedz False
+Ró¿nica 11, odpowiedz False
+Ró¿nica 15, odpowiedz True
+Ró¿nica 11, odpowiedz True
+Ró¿nica 9, odpowiedz True
+Ró¿nica 5, odpowiedz True
+Ró¿nica 3, odpowiedz False

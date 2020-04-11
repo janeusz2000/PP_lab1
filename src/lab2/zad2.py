@@ -22,8 +22,6 @@ for _ in range(0, 50):
     choices.append(choice)
     test_freq.append(delta_f)
 
-    # print(f'Base freq: {base_freq}, delta: {delta_f}, choises: {choices}, test_freq: {test_freq}')
-
     if base_freq > (base_freq + delta_f):
         correct = '1'
     else:
