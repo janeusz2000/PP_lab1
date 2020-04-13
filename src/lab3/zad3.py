@@ -4,8 +4,8 @@ import numpy as np
 import sounddevice as sd
 
 f_dist = [2, 5, 8, 10, 15, 20, -2,  -5, -8, -10, -15, -20]
-ref_wav = fun.gen_simple(1, 0.5, 1000, "sin", -3)
-random_wav = [fun.gen_simple(1, 0.5, 1000 + x, "sin", -3) for x in f_dist]
+ref_wav = fun.gen_simple(1, 0.5, 2200, "sin", -3)
+random_wav = [fun.gen_simple(1, 0.5, 2200 + x, "sin", -3) for x in f_dist]
 
 if __name__ == '__main__':
     tests = f_dist * 5
