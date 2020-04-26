@@ -20,7 +20,7 @@ def butter_bandpass_filter(data, lowcut, highcut, fs, order=5):
     return y
 
 
-if __name__ == '__mian__':
+if __name__ == '__main__':
     volume_offsets = np.linspace(0, -12, num=20, endpoint=False)
     ref = butter_bandpass_filter(fun.gen_simple(1, 0.3, 0, "noise", 0), 800, 1200, fs)
 

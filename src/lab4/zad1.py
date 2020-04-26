@@ -8,7 +8,7 @@ from time import sleep
 fs = 48000
 max_int16 = 32767
 
-if __name__ == '__mian__':
+if __name__ == '__main__':
     volume_offsets = np.linspace(0, -12, num=20, endpoint=False)
     ref = fun.gen_simple(1, 0.3, 0, "noise", 0)
     choices = []
