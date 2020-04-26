@@ -37,5 +37,10 @@ if __name__ == '__main__':
         sleep(1.2)
         user_input = input("Did you hear the tone? y/n ")
         offset -= 1
+    sin = fun.gen_simple(0.5, 0.5, 1100, "sin", offset)
+    sin_right = np.zeros(len(sin), dtype=np.int16)
+    out = np.ndarray.transpose(np.array((sin, sin_right)))
+    sd.play(out, fs)
+    user_input = input("Did you hear the tone? y/n ")
     print('\n' + str(offset))
 
