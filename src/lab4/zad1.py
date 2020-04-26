@@ -9,24 +9,23 @@ fs = 48000
 max_int16 = 32767
 
 if __name__ == '__main__':
-    volume_offsets = np.linspace(0, -12, num=20, endpoint=False)
-    ref = fun.gen_simple(1, 0.3, 0, "noise", 0)
+
+    ref = fun.gen_simple(1, 0.2, 0, "noise", 0)
     choices = []
     tests = []
-    for offset in volume_offsets:
+    user_input = 'y'
+    offset = -6
+    while user_input == 'y':
         left = np.copy(ref)
-        left[int(fs / 4):int(3 * fs / 4)] += fun.gen_simple(0.5, 0.3, 1000, "sin", offset)
-        right = np.zeros((np.size(left))).astype(np.int16)
+        left[int(fs / 4):int(3 * fs / 4)] += fun.gen_simple(0.5, 0.2, 1000, "sin", offset)
+        right = np.zeros(len(left), dtype=np.int16)
 
-        output = np.ndarray.transpose(np.array((left, right)))
+        output = np.array((left, right)).T
         sd.play(output, fs)
         sleep(1.2)
-        choice = input("Did you hear the tone? y/n ")
-        choices.append(choice)
-        tests.append(offset)
+        user_input = input("Did you hear the tone? y/n ")
 
-    with open("../../output/lab4/zad1_results.txt", "w") as f:
-        for (test, choice) in zip(tests, choices):
-            f.write(f'Różnica {test}, wcisnieto {choice}\n')
+        offset -= 1
+    print('\n' + str(offset))
 
 

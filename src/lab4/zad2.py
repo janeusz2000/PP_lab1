@@ -21,23 +21,21 @@ def butter_bandpass_filter(data, lowcut, highcut, fs, order=5):
 
 
 if __name__ == '__main__':
-    volume_offsets = np.linspace(0, -12, num=20, endpoint=False)
-    ref = butter_bandpass_filter(fun.gen_simple(1, 0.3, 0, "noise", 0), 800, 1200, fs)
+    volume_offsets = np.linspace(0, -40, num=40, endpoint=False)
+    noise = fun.gen_simple(1, 0.5, 0, "noise", 0)
+    ref = butter_bandpass_filter(noise, 800, 1200, fun.fs).astype(np.int16)
 
-    choices = []
-    tests = []
-    for offset in volume_offsets:
+    offset = -6
+    user_input = 'y'
+    while user_input == 'y':
         left = np.copy(ref)
-        left[int(fs / 4):int(3 * fs / 4)] += fun.gen_simple(0.5, 0.3, 1100, "sin", offset)
-        right = np.zeros((np.size(left))).astype(np.int16)
+        left[int(fs / 4):int(3 * fs / 4)] += fun.gen_simple(0.5, 0.5, 1100, "sin", offset)
+        right = np.zeros(len(left), dtype=np.int16)
 
         output = np.ndarray.transpose(np.array((left, right)))
         sd.play(output, fs)
         sleep(1.2)
-        choice = input("Did you hear the tone? y/n ")
-        choices.append(choice)
-        tests.append(offset)
+        user_input = input("Did you hear the tone? y/n ")
+        offset -= 1
+    print('\n' + str(offset))
 
-    with open("../../output/lab4/zad2_results.txt", "w") as f:
-        for (test, choice) in zip(tests, choices):
-            f.write(f'Różnica {test}, wcisnieto {choice}\n')
