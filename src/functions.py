@@ -6,8 +6,9 @@ import matplotlib.pyplot as plt
 fs = 48000
 max_int16 = 32767
 
+
 # Gen NORMAL Signal
-def gen_simple(duration, volume, freq, signal_type, db_offset):
+def gen_simple(duration, volume, freq, signal_type, db_offset, dtype=np.int16):
     """
     :param duration: in seconds
     :param volume: overall volume in range 0 to 1 (ex. 0.5)
@@ -21,10 +22,10 @@ def gen_simple(duration, volume, freq, signal_type, db_offset):
     if signal_type == "sin":
         signal_x = np.linspace(0, 2 * np.pi * (freq / fs) * signal_len, num=signal_len, endpoint=False)
         signal_y = np.sin(signal_x) * max_int16
-        signal_y = signal_y.astype(np.int16)
+        # signal_y = signal_y.astype(np.int16)
     elif signal_type == "noise":
         signal_y = np.random.random(signal_len) * max_int16
-        signal_y = signal_y.astype(np.int16)
+        # signal_y = signal_y.astype(np.int16)
     else:
         print('błędne parametry')
         exit()
@@ -43,9 +44,11 @@ def gen_simple(duration, volume, freq, signal_type, db_offset):
 
     # Volume
     real_db_offset = 10 ** (db_offset / 20)
-    signal_y = (signal_y * real_db_offset * volume).astype(np.int16)
+    # signal_y = (signal_y * real_db_offset * volume).astype(np.int16)
+    signal_y = signal_y * real_db_offset * volume
 
-    return signal_y
+    return signal_y.astype(dtype)
+
 
 # Gen Modulated
 def get_simple_FM(duration, volume, freq_base, freq_mod, depth, db_offset):
