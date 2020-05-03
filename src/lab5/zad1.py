@@ -8,16 +8,16 @@ fs = 48000
 max_int16 = 32767
 
 
-def hct(freq_b, duration, fs, which_turned_off=[False, False, False, False]):
-    output = np.zeros(duration*fs)
+def hct(freq_b, duration, fs_, ratio_, which_turned_off=[False, False, False, False]):
+    output = np.zeros(duration*fs_)
     if not which_turned_off[0]:
         output += fun.gen_simple(2, 0.25, freq_b, "sin", 0)
     if not which_turned_off[1]:
-        output += fun.gen_simple(2, 0.25, 2*freq_b, "sin", -6)
+        output += fun.gen_simple(2, 0.25, 2*ratio_*freq_b, "sin", -6)
     if not which_turned_off[2]:
-        output += fun.gen_simple(2, 0.25, 3*freq_b, "sin", -9)
+        output += fun.gen_simple(2, 0.25, 3*ratio_*freq_b, "sin", -9)
     if not which_turned_off[3]:
-        output += fun.gen_simple(2, 0.25, 4*freq_b, "sin", -12)
+        output += fun.gen_simple(2, 0.25, 4*ratio_*freq_b, "sin", -12)
 
     return output.astype(np.int16)
 
@@ -25,22 +25,37 @@ def hct(freq_b, duration, fs, which_turned_off=[False, False, False, False]):
 if __name__ == '__main__':
     freq = 1000
     ref = fun.gen_simple(2, 0.25, freq, "sin", 0)
-    tones = hct(freq, 2, fs)
-    choice = []
+    harm_ratios = np.linspace(0.5, 2.1, num=16, endpoint=False)
+    choices = []
+    task_two_ratios = []
+    for ratio in harm_ratios:
+        tones = hct(freq, 2, fs, ratio,)
+        sd.play(ref)
+        sleep(2.3)
+        sd.play(tones)
+        choice = input('do you hear the same pich y/n')
+        choices.append(choice)
+        if choice == "y":
+            task_two_ratios.append(ratio)
 
-    sd.play(ref)
-    sleep(2.3)
-    sd.play(tones)
-    choice.append(input('do you really think that pitch is the same? y/n'))
+    with open("../../output/lab5/zad1_results_1.txt", "w") as f:
+        for (harm_ratio, choice) in zip(harm_ratios, choices):
+            f.write(f'Różnica {harm_ratio}, wcisnieto {choice}\n')
+        f.close()
 
-    tones = hct(freq, 2, fs, [False, True, False, True])
+    choices = []
+    for ratio in task_two_ratios:
+        htc_test = hct(freq, 2, fs, ratio, [False, True, False, True])
+        sd.play(ref)
+        sleep(2.3)
+        sd.play(htc_test)
+        choice = input("Did you hear change in pitch? y/n")
+        choices.append(choice)
 
-    sd.play(ref)
-    sleep(2.3)
-    sd.play(tones)
-    choice.append(input('do you really think that pitch is the same now???? y/n'))
+    with open("../../output/lab5/zad1_results_2.txt", "w") as f:
+        for (harm_ratio, choice) in zip(task_two_ratios, choices):
+            f.write(f'Różnica {harm_ratio}, wcisnieto {choice}\n')
+        f.close()
 
-    if choice[0] == choice[1] and choice[0] == "y":
-        print("You are amazing")
-    else:
-        print("you are not amazing")
+
+    print("You are amazing")
