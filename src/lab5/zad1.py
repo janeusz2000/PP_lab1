@@ -2,7 +2,7 @@ import numpy as np
 import sounddevice as sd
 from time import sleep
 import src.functions as fun
-
+import random
 # Global Variables
 fs = 48000
 max_int16 = 32767
@@ -45,7 +45,10 @@ if __name__ == '__main__':
 
     choices = []
     for ratio in task_two_ratios:
-        htc_test = hct(freq, 2, fs, ratio, [False, True, False, True])
+        delete_ind = int(random.random()*3+1)
+        delete_vec = [False, False, False, False]
+        delete_vec[delete_ind] = True
+        htc_test = hct(freq, 2, fs, ratio, delete_vec)
         sd.play(ref)
         sleep(2.3)
         sd.play(htc_test)
